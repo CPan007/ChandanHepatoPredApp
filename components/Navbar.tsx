@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Activity, LogOut, User as UserIcon } from 'lucide-react';
+import { BrainCircuit, LogOut, User as UserIcon } from 'lucide-react';
 import { AuthContext } from '../App';
 import { Button } from './Button';
 
@@ -19,11 +19,16 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="bg-medical-600 p-1.5 rounded-lg">
-                <Activity className="h-6 w-6 text-white" />
+            <Link to="/" className="flex items-center gap-3">
+              <div className="bg-medical-600 p-1.5 rounded-lg flex-shrink-0">
+                <BrainCircuit className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900 tracking-tight">HepatoGuard AI</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-gray-900 tracking-tight leading-none">CHASEEE</span>
+                <span className="text-[9px] sm:text-[10px] text-gray-500 font-medium leading-tight pt-0.5 block">
+                  Chandan Healthcare AI Smart Engine for Empowering Experience
+                </span>
+              </div>
             </Link>
           </div>
           

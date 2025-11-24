@@ -31,3 +31,25 @@ export interface AuthContextType {
   logout: () => void;
   isAuthenticated: boolean;
 }
+
+export interface ClaimData {
+  claimAmount: string;
+  patientAge: string;
+  patientGender: 'Male' | 'Female';
+  providerSpecialty: string;
+  claimStatus: string;
+  patientIncome: string;
+  patientMaritalStatus: string;
+  patientEmploymentStatus: string;
+  providerLocation: string;
+  claimType: string;
+  claimSubmissionMethod: string;
+  diseaseSeverity: string;
+}
+
+export interface ClaimPredictionResult {
+  isFraud: boolean;
+  riskScore: number; // 0-100
+  reasoning: string;
+  flaggedFields: string[];
+}

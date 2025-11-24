@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/Button';
-import { ShieldCheck, Activity, BrainCircuit, Stethoscope } from 'lucide-react';
+import { ShieldCheck, Activity, BrainCircuit, ShieldAlert } from 'lucide-react';
 
 export const Home: React.FC = () => {
   return (
@@ -9,30 +9,37 @@ export const Home: React.FC = () => {
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-white">
         <div className="mx-auto max-w-7xl">
-          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32 pt-20 px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:w-full lg:max-w-3xl lg:pb-28 xl:pb-32 pt-20 px-4 sm:px-6 lg:px-8">
             <main className="mt-10 mx-auto max-w-7xl sm:mt-12 md:mt-16 lg:mt-20 xl:mt-28">
               <div className="sm:text-center lg:text-left">
-                <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                  <span className="block xl:inline">Advanced AI for</span>{' '}
-                  <span className="block text-medical-600 xl:inline">Liver Disease Prediction</span>
+                <div className="inline-flex items-center rounded-full bg-medical-50 px-3 py-1 text-sm font-semibold text-medical-600 mb-4 border border-medical-100">
+                    <BrainCircuit className="w-4 h-4 mr-2" />
+                    AI-Powered Healthcare Engine
+                </div>
+                <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl mb-2">
+                  <span className="block text-medical-600">CHASEEE</span>
                 </h1>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-700 mb-6 leading-tight">
+                  Chandan Healthcare AI Smart Engine for Empowering Experience
+                </h2>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Empowering healthcare professionals with next-generation machine learning algorithms to assess liver health risks with high accuracy and speed.
+                  Empowering healthcare professionals with next-generation machine learning algorithms to assess liver health risks and detect insurance claim fraud with high accuracy.
                 </p>
-                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-4">
+                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start gap-3 flex-wrap">
                   <div className="rounded-md shadow">
                     <Link to="/login">
                       <Button className="w-full md:w-auto h-12 text-base px-8">
-                        Access Portal
+                        Physician Login
                       </Button>
                     </Link>
                   </div>
-                  <div className="mt-3 sm:mt-0 sm:ml-3">
-                    <a href="#features">
-                      <Button variant="outline" className="w-full md:w-auto h-12 text-base px-8">
-                        Learn More
-                      </Button>
-                    </a>
+                  <div className="mt-0">
+                    <Link to="/claim-fraud">
+                        <Button variant="secondary" className="w-full md:w-auto h-12 text-base px-8 bg-teal-600 hover:bg-teal-700">
+                          <ShieldAlert className="w-4 h-4 mr-2" />
+                          Claim Fraud Prediction
+                        </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -68,7 +75,7 @@ export const Home: React.FC = () => {
                   <p className="ml-16 text-lg leading-6 font-medium text-gray-900">AI-Powered Analysis</p>
                 </dt>
                 <dd className="mt-2 ml-16 text-base text-gray-500">
-                  Utilizes Google Gemini 2.5 Flash to analyze complex biological markers and identify subtle patterns.
+                  Utilizes Smart AI Algorithms to analyze complex Diseases Predictions and identify subtle patterns.
                 </dd>
               </div>
 

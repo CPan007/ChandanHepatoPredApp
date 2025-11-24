@@ -3,7 +3,8 @@ import { analyzePatientData } from '../services/geminiService';
 import { PatientData, PredictionResult } from '../types';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
-import { AlertTriangle, CheckCircle, FileText, Activity, ArrowRight, RefreshCw } from 'lucide-react';
+import { AlertTriangle, FileText, Activity, ArrowRight, FlaskConical, Users } from 'lucide-react';
+import { ChatAssistant } from '../components/ChatAssistant';
 
 const initialData: PatientData = {
   age: '',
@@ -18,6 +19,54 @@ const initialData: PatientData = {
   albuminGlobulinRatio: '',
 };
 
+const PERSONAS = {
+  low: {
+    label: "Low Risk - John Doe (Healthy)",
+    data: {
+      age: '32',
+      gender: 'Male',
+      totalBilirubin: '0.8',
+      directBilirubin: '0.2',
+      alkalinePhosphotase: '65',
+      alamineAminotransferase: '22',
+      aspartateAminotransferase: '24',
+      totalProteins: '7.0',
+      albumin: '4.2',
+      albuminGlobulinRatio: '1.5',
+    } as PatientData
+  },
+  medium: {
+    label: "Medium Risk - Sarah Smith (Early Stage)",
+    data: {
+      age: '45',
+      gender: 'Female',
+      totalBilirubin: '1.4',
+      directBilirubin: '0.5',
+      alkalinePhosphotase: '180',
+      alamineAminotransferase: '45',
+      aspartateAminotransferase: '50',
+      totalProteins: '6.5',
+      albumin: '3.2',
+      albuminGlobulinRatio: '0.9',
+    } as PatientData
+  },
+  high: {
+    label: "High Risk - Robert Johnson (Advanced)",
+    data: {
+      age: '58',
+      gender: 'Male',
+      totalBilirubin: '3.5',
+      directBilirubin: '1.8',
+      alkalinePhosphotase: '290',
+      alamineAminotransferase: '120',
+      aspartateAminotransferase: '145',
+      totalProteins: '5.8',
+      albumin: '2.4',
+      albuminGlobulinRatio: '0.6',
+    } as PatientData
+  }
+};
+
 export const LiverPrediction: React.FC = () => {
   const [formData, setFormData] = useState<PatientData>(initialData);
   const [result, setResult] = useState<PredictionResult | null>(null);
@@ -27,6 +76,15 @@ export const LiverPrediction: React.FC = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handlePersonaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const key = e.target.value as keyof typeof PERSONAS;
+    if (PERSONAS[key]) {
+      setFormData(PERSONAS[key].data);
+      setResult(null);
+      setError(null);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -61,6 +119,28 @@ export const LiverPrediction: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Form Section */}
           <div className="lg:col-span-2 space-y-6">
+            
+            {/* Persona Selector */}
+            <div className="bg-medical-50 border border-medical-200 rounded-lg p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+               <div className="flex items-center gap-2 text-medical-700 font-medium">
+                  <Users className="h-5 w-5" />
+                  <span>Test Personas:</span>
+               </div>
+               <select 
+                 className="block w-full sm:w-auto flex-grow rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-medical-500 focus:outline-none focus:ring-medical-500 sm:text-sm"
+                 onChange={handlePersonaChange}
+                 defaultValue=""
+               >
+                 <option value="" disabled>Select a dummy patient...</option>
+                 <option value="low">{PERSONAS.low.label}</option>
+                 <option value="medium">{PERSONAS.medium.label}</option>
+                 <option value="high">{PERSONAS.high.label}</option>
+               </select>
+               <div className="text-xs text-medical-600 italic">
+                 Select a persona to auto-populate clinical data.
+               </div>
+            </div>
+
             <div className="bg-white shadow rounded-lg p-6 border border-gray-200">
               <form onSubmit={handleSubmit}>
                 <div className="space-y-6">
@@ -113,7 +193,7 @@ export const LiverPrediction: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="pt-4 flex items-center justify-end gap-3">
+                  <div className="pt-4 flex flex-wrap items-center justify-end gap-3">
                     <Button type="button" variant="ghost" onClick={handleReset} disabled={isLoading}>
                       Reset Form
                     </Button>
@@ -220,6 +300,7 @@ export const LiverPrediction: React.FC = () => {
           </div>
         </div>
       </div>
+      <ChatAssistant />
     </div>
   );
 };
